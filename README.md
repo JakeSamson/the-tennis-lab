@@ -93,3 +93,5 @@
 - If email confirmation is enabled in Supabase Auth settings, new users are sent to
   a "check your email" screen; with it disabled they land straight on their dashboard.
 - The migration includes a trigger that blocks users changing their own role.
+
+  
