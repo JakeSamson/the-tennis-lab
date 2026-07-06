@@ -1,0 +1,133 @@
+/* Brand tokens — source of truth in PROJECT.md */
+:root {
+  --court-green: #2d6a4f;
+  --court-green-dark: #1f4d39;
+  --clay-orange: #e76f51;
+  --line-white: #fafafa;
+  --net-charcoal: #264653;
+  --ball-yellow: #e9c46a;
+  --error: #b3261e;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--line-white);
+  color: var(--net-charcoal);
+}
+.auth-layout {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  /* Signature: baseline stripe — a court line running behind the card */
+  background: linear-gradient(var(--line-white) 0 0) padding-box,
+    linear-gradient(to bottom, var(--line-white) 48%, var(--court-green) 48% 52%, var(--line-white) 52%);
+}
+.card {
+  background: #fff;
+  border: 1px solid #e3e6e4;
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 24px rgba(38, 70, 83, 0.08);
+}
+.brand { font-weight: 800; letter-spacing: -0.02em; color: var(--court-green); margin: 0 0 0.25rem; }
+.field { display: grid; gap: 0.3rem; margin-block: 0.75rem; }
+label { font-size: 0.875rem; font-weight: 600; }
+input, select {
+  font: inherit; padding: 0.65rem 0.75rem;
+  border: 1px solid #c8cfcc; border-radius: var(--radius); background: #fff;
+}
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 3px solid var(--ball-yellow); outline-offset: 1px;
+}
+.btn {
+  font: inherit; font-weight: 700; width: 100%; margin-top: 0.75rem;
+  padding: 0.7rem 1rem; border: 0; border-radius: var(--radius);
+  background: var(--court-green); color: #fff; cursor: pointer;
+}
+.btn:hover { background: var(--court-green-dark); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.error { color: var(--error); font-size: 0.875rem; margin-top: 0.5rem; }
+.muted { color: #5b6d67; font-size: 0.9rem; }
+a { color: var(--clay-orange); font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise 0.25s ease-out; }
+  @keyframes rise { from { transform: translateY(6px); opacity: 0; } }
+}
+
+/* --- Phase 1: app pages --- */
+.page { max-width: 720px; margin: 0 auto; padding: 1rem; display: grid; gap: 1rem; }
+.page__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.page .card { max-width: none; }
+.page__head .btn, .row .btn, .row__actions .btn { width: auto; margin-top: 0; padding: 0.45rem 0.8rem; }
+h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.rows { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+.row {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  padding: 0.6rem 0.75rem; border: 1px solid #e3e6e4; border-radius: var(--radius);
+  flex-wrap: wrap; /* stacks gracefully on narrow phones */
+}
+.row__actions { display: flex; gap: 0.5rem; }
+.btn--secondary { background: #fff; color: var(--court-green); border: 1.5px solid var(--court-green); }
+.btn--secondary:hover { background: #eef4f1; }
+.btn--danger { background: #fff; color: var(--error); border: 1.5px solid var(--error); }
+.btn--danger:hover { background: #fbeeed; }
+
+/* --- Phase 2 --- */
+textarea { font: inherit; padding: 0.65rem 0.75rem; border: 1px solid #c8cfcc; border-radius: var(--radius); resize: vertical; }
+.badge { font-size: 0.75rem; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 999px; }
+.badge--yes { background: var(--ball-yellow); color: var(--net-charcoal); }
+.badge--muted { background: #e8ecea; color: #5b6d67; }
+
+/* --- Phase 3: video --- */
+.player { width: 100%; border-radius: var(--radius); background: #000; max-height: 70vh; }
+.timestamp {
+  font: inherit; font-weight: 800; color: var(--clay-orange);
+  background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline;
+}
+input[type="file"] { border: 0; padding: 0.25rem 0; }
+
+/* --- Phase 4: biomech library --- */
+.page__nav { display: flex; align-items: center; gap: 1rem; }
+.phase { border: 1px solid #e3e6e4; border-radius: var(--radius); padding: 0.5rem 0.75rem; margin-top: 0.5rem; }
+.phase summary { cursor: pointer; font-weight: 700; }
+.phase[open] summary { color: var(--court-green); }
+.phase p { margin: 0.5rem 0 0.25rem; }
+.phase__num {
+  display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem;
+  border-radius: 999px; background: var(--court-green); color: #fff;
+  font-size: 0.8rem; margin-right: 0.35rem;
+}
+
+/* --- Phase 5: programs --- */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+@media (max-width: 420px) { .grid3 { grid-template-columns: 1fr; } }
+.tick { width: 1.2rem; height: 1.2rem; margin-right: 0.5rem; accent-color: var(--court-green); vertical-align: -0.2rem; }
+.done { opacity: 0.6; }
+.done strong { text-decoration: line-through; }
+
+/* --- Phase 6: schedule --- */
+.day-head { font-size: 0.9rem; color: #5b6d67; margin: 0.75rem 0 0.25rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+/* --- Phase 7: plans --- */
+.plan-list { counter-reset: step; padding-left: 0; }
+.plan-list > li { counter-increment: step; }
+.plan-list > li > span::before {
+  content: counter(step); display: inline-grid; place-items: center;
+  width: 1.5rem; height: 1.5rem; border-radius: 999px; margin-right: 0.4rem;
+  background: var(--clay-orange); color: #fff; font-size: 0.8rem; font-weight: 700;
+}
+.page__nav { flex-wrap: wrap; row-gap: 0.25rem; justify-content: flex-end; }
+
+/* --- Phase 9: workbook --- */
+.field--check label { display: flex; align-items: center; gap: 0.35rem; font-weight: 500; }
+
+/* --- Phase 10: billing --- */
+.banner {
+  background: var(--ball-yellow); color: var(--net-charcoal);
+  padding: 0.6rem 0.9rem; border-radius: var(--radius); font-weight: 600;
+}
