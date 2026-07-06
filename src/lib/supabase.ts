@@ -1,16 +1,26 @@
 import { createClient } from "@supabase/supabase-js";
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const rawUrl = import.meta.env.VITE_SUPABASE_URL;
+const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Fail fast with a clear message instead of cryptic runtime errors.
-if (!url || !anonKey) {
+if (!rawUrl || !rawKey) {
   throw new Error(
-    "Missing Supabase config. Copy .env.example to .env.local and fill in your project values."
+    "Missing Supabase config. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY."
   );
 }
 
-export const supabase = createClient(url, anonKey);
+// Normalize the URL: people paste values with trailing slashes or /rest/v1
+// tails from the Supabase dashboard. Keep only scheme + host.
+function normalizeUrl(input: string): string {
+  try {
+    return new URL(input.trim()).origin;
+  } catch {
+    throw new Error(`VITE_SUPABASE_URL is not a valid URL: "${input}"`);
+  }
+}
+
+export const supabase = createClient(normalizeUrl(rawUrl), rawKey.trim());
 
 export type UserRole = "coach" | "athlete" | "parent";
 
